@@ -1,0 +1,19 @@
+{
+  "name": "ynote",
+  "version": "1.0.0",
+  "description": "Comment on videos! ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rjuner/ynote.git"
+  },
+  "author": "Rhea Rivera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rjuner/ynote/issues"
+  },
+  "homepage": "https://github.com/rjuner/ynote#readme"
+}
