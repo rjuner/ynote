@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/rjuner/ynote/issues"
   },
-  "homepage": "https://github.com/rjuner/ynote#readme"
+  "homepage": "https://github.com/rjuner/ynote#readme",
+  "dependencies": {
+    "mongoose": "^4.6.0",
+    "morgan": "^1.7.0"
+  }
 }

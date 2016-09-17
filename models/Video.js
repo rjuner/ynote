@@ -1,23 +1,31 @@
-// require mongoose
 var mongoose = require('mongoose');
 
-// create a Schema class with mongoose
 var Schema = mongoose.Schema;
 
-// Create a VideoSchema with the Schema class
 var VideoSchema = new Schema({
-  // a unique String
-  name: {
+
+  //  This is input in a form by User
+  title: {
     type:String,
-    unique:true
-  },
-  // notes property for the user
-  notes: [{
-  		// store ObjectIds in the array
+    unique:true, 
+    required: true
+  }, 
+  url: {
+    type:String,
+    unique: true, 
+    required: true
+
+  }, 
+  duration: {
+    type: Number, 
+    required: true
+  }, 
+  comments: [{
       type: Schema.Types.ObjectId,
-      // the ObjectIds will refer to the ids in the Note model
-      ref: 'Note'
-  }]
+      ref: 'Comment'
+  }], 
+
+
 });
 
 // create the User model with the UserSchema
