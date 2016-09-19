@@ -37,6 +37,12 @@
 	<div id="currentTime"></div>
 	<button id="jumpTo">1337 button</button>
 
+  <button id="addTime">Add Time</button>
+
+  <div id="addedTime"></div>
+
+
+
     <script>
      // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
@@ -68,6 +74,11 @@
         });
       });
 
+      $(document).on('click', '#addTime', function(){
+          var timeFromPage = $("#currentTime").text();
+          $("#addedTime").append(timeFromPage);
+        });
+
       // 4. The API will call this function when the video player is ready.
       function onPlayerReady(event) {
         event.target.playVideo();
@@ -78,7 +89,7 @@
       //    the player should play for six seconds and then stop.
       var done = false;
 
-      //var ytTime; 
+      //var ytTime;
 
       function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.PLAYING && !done) {
@@ -96,7 +107,9 @@
 
           //console.log(minutes + ":" + seconds);
 
-          $("#currentTime").text(minutes + ":" + seconds);
+          var currentTime = $("#currentTime").text(minutes + ":" + seconds);
+
+          // $("#addedTime").append(minutes + ":" + seconds);
 
           //setTimeout(stopVideo, 6000);
           //done = true;

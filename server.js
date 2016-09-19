@@ -28,19 +28,19 @@ db.once('open', function(){
 // Model for the URLS that get put into the form
 var Video = require('./models/Video.js'); 
 
-var exampleVideo = new Video({
-	title: "Test Video", 
-	url: "https://vimeo.com/76979871", 
-	duration: 61.86
-})
+// var exampleVideo = new Video({
+// 	title: "Test Video", 
+// 	url: "https://vimeo.com/76979871", 
+// 	duration: 61.86
+// })
 
-exampleVideo.save(function(err, doc){
-	if (err){
-		console.log(err);
-	} else {
-		console.log(doc);
-	}
-}); 
+// exampleVideo.save(function(err, doc){
+// 	if (err){
+// 		console.log(err);
+// 	} else {
+// 		console.log(doc);
+// 	}
+// }); 
 
 app.get('/', function(req, res) {
   res.send(index.html);
