@@ -3,23 +3,21 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var VideoSchema = new Schema({
-  url: {
+  yt_url: {
     type:String,
-    unique: true, 
     required: true
   }, 
   duration: {
     type: String, 
     required: true
   }, 
-  comments: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Comment'
-  }]
-
+  yt_id:{
+    type: String,
+    required: true
+  }
 });
 
-// create the User model with the UserSchema
+// create the Video model with the VideoSchema
 var Video = mongoose.model('Video', VideoSchema);
 
 // Export the user model

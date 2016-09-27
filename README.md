@@ -1,2 +1,0 @@
-# ynote
-Final Project

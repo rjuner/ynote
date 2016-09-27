@@ -32,64 +32,31 @@ db.once('open', function () {
 });
 
 var Video = require('./models/Video.js'); 
-var Comment = require('./models/Comment.js');
+// var Comment = require('./models/Comment.js');
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 app.get('/', function(req, res){
-	res.sendFile('./public/index.html')
-})
-
-app.get('/write', function(req, res){
-
-	var newVid = new Video({
-		url: 'https://www.youtube.com/watch?v=BcsfftwLUf0', 
-		duration: '3:04', 
-		comments: 'test comment'
-	});
-
-	db.videos.save(function(err, doc) {
-	  // log any errors
-	  if (err) {
-	    console.log(err);
-	  } 
-	  // or log the doc
-	  else {
-	    console.log(doc);
-	  }
-	});
-
+	res.sendFile('./public/index.html');
 });
 
+app.post('/submit', function(req, res){
 
-// app.post('/submit', function(req, res){
+	console.log(req.body); 
 
-// 	var newVideo = new Video(req.body); 
+	var newvideo = new Video(req.body);
 
-// 	db.videos.save(function(err, saved){
-// 		if (err) {
-// 			res.send(err);
-// 		} else {
-// 			res.send(saved);
-// 		}
-// 	});
-// });
-
-// app.get('/videos', function(req, res) {
-//   // find all videos in the Video collection
-//   Video.find({}, function(err, doc) {
-//     // send any errors to the browser
-//     if (err) {
-//       res.send(err);
-//     } 
-//     // or send the doc to the browser
-//     else {
-//       res.send(doc);
-//     }
-//   });
-// });
-
-
+	// ????? Saves it to the db
+	newvideo.save(function (err, saved) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log('Saved!');
+			//	????? Sends back the new object
+			res.send(saved);
+	  	}
+	});
+});
 
 app.listen(PORT, function() {
 	console.log("App listening on PORT: " + PORT);
