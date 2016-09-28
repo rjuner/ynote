@@ -50,8 +50,14 @@ function onPlayerReady(event) {
 
 	// Load duration of video 
 	var duration = player.getDuration();
+	console.log("Video duration : ");
 	console.log(converttoseconds(duration)); 
 }
+
+$('#seekto').on('click', function(){
+	console.log("I'm working!");
+	player.seekTo(817.917613, true);
+});
 
 //	This anonymous function makes the seconds nice
 $(document).on('click', '#consoletime', function () {

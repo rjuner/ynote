@@ -22,8 +22,8 @@ $(document).on('click', '#addurl', function(){
     url: '/submit', 
     data: {
       yt_url: $('#user_url').val(),
-      duration: '3:24', 
-      yt_id: 'TBXv37PFcAQ'
+      duration: '01:00', 
+      yt_id: thisistheid,
     }
   }).done(function(data){
     console.log(data);
