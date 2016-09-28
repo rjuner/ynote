@@ -3,6 +3,11 @@ $(document).on('click', '#addurl', function(){
 
   console.log("I'm working!");
 
+  var mainurl = $('#usercomment').val()
+
+  var thisistheid = linkifyYouTubeURLs(mainurl);
+  makePlayer(thisistheid);
+
   $.ajax({
     type: "POST",
     dataType: "json", 
@@ -27,10 +32,10 @@ function linkifyYouTubeURLs(text) {
 
  // 'https://www.youtube.com/watch?v=BcsfftwLUf0'
 
-$('#loadthisurl').on("click", function(event) {
-  // debugger;
-  var mainurl = $('#mainurl').val()
+// $('#loadthisurl').on("click", function(event) {
+//   // debugger;
+//   var mainurl = $('#mainurl').val()
 
-  var thisistheid = linkifyYouTubeURLs(mainurl);
-  makePlayer(thisistheid);
-});
+//   var thisistheid = linkifyYouTubeURLs(mainurl);
+//   makePlayer(thisistheid);
+// });

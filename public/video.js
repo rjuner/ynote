@@ -1,4 +1,4 @@
-// 2. This code loads the IFrame Player API code asynchronously.
+//	This code loads the IFrame Player API code asynchronously.
 var tag = document.createElement('script');
 
 tag.src = "https://www.youtube.com/iframe_api";
@@ -40,44 +40,34 @@ function getvideoseconds(){
 	return converttoseconds(rawtime);
 }
 
+// function getduration(){
+// 	var duration = player.getDuration();
+// 	console.log(converttoseconds(duration)); 
+// }
+
 
 function onYouTubeIframeAPIReady(){
 	$('#loadthisurl').prop('disabled', false);
 }
 
-// 4. The API will call this function when the video player is ready.
+//	The API will call this function when the video player is ready.
 function onPlayerReady(event) {
 	event.target.playVideo();
 }
 
-//This anonymous function jumps to 13:37 when you click the button
-$(document).on('click', '#jumpTo', function () {
+//	This anonymous function makes the seconds nice
+$(document).on('click', '#consoletime', function () {
 	var prettyTime = getvideoseconds() 
 	console.log(prettyTime);
 });
 
-
-// 5. The API calls this function when the player's state changes.
-//    The function indicates that when playing a video (state=1),
-//    the player should play for six seconds and then stop.
 var done = false;
 
-//var ytTime;
 
+//	The API calls this function when the player's state changes.
 function onPlayerStateChange(event) {
 	if (event.data == YT.PlayerState.PLAYING && !done) {
 		var videoTime = event.target.getCurrentTime();
-
-		// console.log(videoTime);
-
-		//Below shows the time you're at at the video. 
-		
-		// var currentTime = $("#currentTime").text(minutes + ":" + seconds);
-
-		// $("#addedTime").append(minutes + ":" + seconds);
-
-		//setTimeout(stopVideo, 6000);
-		//done = true;
 	}
 }
 
