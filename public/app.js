@@ -44,8 +44,7 @@ $('#add_comment').on('click', function(){
     url: "/comment", 
     data: {
       timecode: "01:15", 
-      video_obj_id: 'ObjectId("57eadcc43f9cf71a32e8610e")', 
-      comment: "This comment is with 1:15"
+      comment: $('#user_comment').val()
     }
   }).done(function(data){
     console.log(data);

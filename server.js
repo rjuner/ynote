@@ -65,18 +65,18 @@ app.post('/comment', function(req, res){
 
 	console.log('This is from /comment: ');
 	console.log(req.body); 
-
+	
 	var newcomment = new Comment(req.body); 
 
-	newcomment.save(function(err, saved){
-		if (err) { 
-			console.log(err); 
+	newcomment.save(function (err, saved){
+		if (err) {
+			console.log(err);
 			res.send(err);
-		} else {
-			console.log('Comment Added.'); 
-			res.send(saved); 
+		} else { 
+			console.log('Comment Saved!'); 
+			res.send(saved);
 		}
-	}); 
+	});
 }); 
 
 

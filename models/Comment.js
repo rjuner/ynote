@@ -7,10 +7,6 @@ var CommentSchema = new Schema({
     type:String,
     required: true
   }, 
-  video_obj_id: {
-    type: Schema.Types.ObjectId, 
-    ref: 'Video'
-  }, 
   comment:{
     type: String,
     required: true
