@@ -32,7 +32,7 @@ db.once('open', function () {
 });
 
 var Video = require('./models/Video.js'); 
-// var Comment = require('./models/Comment.js');
+var Comment = require('./models/Comment.js');
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -42,6 +42,7 @@ app.get('/', function(req, res){
 
 app.post('/submit', function(req, res){
 
+	console.log("This is from /submit: "); 
 	console.log(req.body); 
 
 	var newvideo = new Video(req.body);
@@ -50,6 +51,7 @@ app.post('/submit', function(req, res){
 	newvideo.save(function (err, saved) {
 		if (err) {
 			console.log(err);
+			res.send(err);
 		} else {
 			console.log('Saved!');
 			//	????? Sends back the new object
@@ -57,6 +59,27 @@ app.post('/submit', function(req, res){
 	  	}
 	});
 });
+
+
+app.post('/comment', function(req, res){
+
+	console.log('This is from /comment: ');
+	console.log(req.body); 
+
+	var newcomment = new Comment(req.body); 
+
+	newcomment.save(function(err, saved){
+		if (err) { 
+			console.log(err); 
+			res.send(err);
+		} else {
+			console.log('Comment Added.'); 
+			res.send(saved); 
+		}
+	}); 
+}); 
+
+
 
 app.listen(PORT, function() {
 	console.log("App listening on PORT: " + PORT);

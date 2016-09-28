@@ -8,7 +8,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 //  global youtube player instance
 var player;
 
-// load actualy player with id
+// load actual player with id
 function makePlayer(id){
 	player = new YT.Player('player', {
 		height: '390',
@@ -40,12 +40,6 @@ function getvideoseconds(){
 	return converttoseconds(rawtime);
 }
 
-// function getduration(){
-// 	var duration = player.getDuration();
-// 	console.log(converttoseconds(duration)); 
-// }
-
-
 function onYouTubeIframeAPIReady(){
 	$('#loadthisurl').prop('disabled', false);
 }
@@ -53,6 +47,10 @@ function onYouTubeIframeAPIReady(){
 //	The API will call this function when the video player is ready.
 function onPlayerReady(event) {
 	event.target.playVideo();
+
+	// Load duration of video 
+	var duration = player.getDuration();
+	console.log(converttoseconds(duration)); 
 }
 
 //	This anonymous function makes the seconds nice
