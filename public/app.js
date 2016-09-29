@@ -1,6 +1,8 @@
 //  This code loads the IFrame Player API code asynchronously.
 var tag = document.createElement('script');
 
+var current_video;
+
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -118,13 +120,27 @@ $(document).on('click', '#addurl', function(){
       yt_id: thisistheid
     }
   }).done(function(data){
-    console.log(data);
-    var current_video = data._id;
+    console.log("I'm the video: ",data);
+    current_video = data._id;
     $('#user_url').val("");
   });
 });
 
-var current_video;
+// var current_video;
+
+
+
+//  Click on "make comment" to grab video info from DB
+// ????? Show associated comments
+
+// $('#make_comment').on('click', function(){
+
+
+
+
+// });
+
+
 
 $('#add_comment').on('click', function(){
 
@@ -138,11 +154,16 @@ $('#add_comment').on('click', function(){
     url: "/comment", 
     data: {
       timecode: "01:15", 
-      comment: $('#user_comment').val() 
+      comment: $('#user_comment').val(),
+      video_id:  current_video
     }
   }).done(function(data){
-    console.log(data);
-    $('#comment_area').prepend('<p>' + data.comment + '</p>' + '</br>'); 
+    console.log("comment?",data);
+    $('#comment_area').html("");
+    data.comments.forEach(function(comments){
+        $('#comment_area').prepend('<p>' + comments.comment + '</p>' + '</br>'); 
+
+    });
   });
 });
 

@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
 app.use(bodyParser.json({type:'application/vnd.api+json'}));
-
+mongoose.Promise = Promise;
 app.use(express.static('./public'));
 
 
@@ -56,24 +56,35 @@ app.post('/submit', function(req, res){
 			console.log('Saved!');
 			//	????? Sends back the new object
 			res.send(saved);
+      // console.log("From saved._id: ");
+      // console.log(saved._id);
+
+      // var current_video = saved._id;
 	  	}
 	});
 });
 
+// var current_video;
+
 app.post('/comment', function(req, res) {
+
+  console.log(req.body);
 	
   // use our Comment model to make a new note from the req.body
   var newcomment = new Comment(req.body);
   // Save the new note to mongoose
   newcomment.save(function(err, doc) {
     // send any errors to the browser
+    console.log("DOES THE COMMNET GET SAAAVE")
     if (err) {
       res.send(err);
+      console.log("IM AN ERRORRR", err);
     } 
     // Otherwise
     else {
       // Find the video and push the new comment _id into the videos's notes array
-      Video.findOneAndUpdate({}, {$push: {'comments': doc._id}}, {new: true}, function(err, doc) {
+      Video.findOneAndUpdate({_id: req.body.video_id}, {$push: {'comments': doc._id}}, {new: true}).populate("comments").exec(function(err, doc) {
+        console.log("THIS IS THE VIDEOOO",doc);
         // send any errors to the browser
         if (err) {
           res.send(err);
@@ -82,30 +93,10 @@ app.post('/comment', function(req, res) {
         else {
           res.send(doc);
         }
-      });
+      })
     }
   });
 });
-
-
-
-// app.post('/comment', function(req, res){
-
-// 	console.log('This is from /comment: ');
-// 	console.log(req.body); 
-	
-// 	var newcomment = new Comment(req.body); 
-
-// 	newcomment.save(function (err, saved){
-// 		if (err) {
-// 			console.log(err);
-// 			res.send(err);
-// 		} else { 
-// 			console.log('Comment Saved!'); 
-// 			res.send(saved);
-// 		}
-// 	});
-// }); 
 
 
 
