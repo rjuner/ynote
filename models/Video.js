@@ -14,7 +14,11 @@ var VideoSchema = new Schema({
   yt_id:{
     type: String,
     required: true
-  }
+  }, 
+  comments: [{
+    type: Schema.Types.ObjectId, 
+    ref: 'Comment'
+  }]
 });
 
 // create the Video model with the VideoSchema

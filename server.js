@@ -60,24 +60,52 @@ app.post('/submit', function(req, res){
 	});
 });
 
-
-app.post('/comment', function(req, res){
-
-	console.log('This is from /comment: ');
-	console.log(req.body); 
+app.post('/comment', function(req, res) {
 	
-	var newcomment = new Comment(req.body); 
+  // use our Comment model to make a new note from the req.body
+  var newcomment = new Comment(req.body);
+  // Save the new note to mongoose
+  newcomment.save(function(err, doc) {
+    // send any errors to the browser
+    if (err) {
+      res.send(err);
+    } 
+    // Otherwise
+    else {
+      // Find the video and push the new comment _id into the videos's notes array
+      Video.findOneAndUpdate({}, {$push: {'comments': doc._id}}, {new: true}, function(err, doc) {
+        // send any errors to the browser
+        if (err) {
+          res.send(err);
+        } 
+        // or send the doc to the browser
+        else {
+          res.send(doc);
+        }
+      });
+    }
+  });
+});
 
-	newcomment.save(function (err, saved){
-		if (err) {
-			console.log(err);
-			res.send(err);
-		} else { 
-			console.log('Comment Saved!'); 
-			res.send(saved);
-		}
-	});
-}); 
+
+
+// app.post('/comment', function(req, res){
+
+// 	console.log('This is from /comment: ');
+// 	console.log(req.body); 
+	
+// 	var newcomment = new Comment(req.body); 
+
+// 	newcomment.save(function (err, saved){
+// 		if (err) {
+// 			console.log(err);
+// 			res.send(err);
+// 		} else { 
+// 			console.log('Comment Saved!'); 
+// 			res.send(saved);
+// 		}
+// 	});
+// }); 
 
 
 
