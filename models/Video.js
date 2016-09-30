@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var VideoSchema = new Schema({
   yt_url: {
     type:String,
+    unique: true,
     required: true
   }, 
   duration: {
@@ -13,8 +14,13 @@ var VideoSchema = new Schema({
   }, 
   yt_id:{
     type: String,
+    unique: true,
     required: true
   }, 
+  owner_id: {
+    type: Schema.Types.ObjectId, 
+    ref: 'User'
+  },
   comments: [{
     type: Schema.Types.ObjectId, 
     ref: 'Comment'

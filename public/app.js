@@ -113,7 +113,7 @@ $(document).on('click', '#addurl', function(){
   $.ajax({
     type: "POST",
     dataType: "json", 
-    url: '/submit', 
+    url: '/videos', 
     data: {
       yt_url: $('#user_url').val(),
       duration: 'duration', 
@@ -126,21 +126,6 @@ $(document).on('click', '#addurl', function(){
   });
 });
 
-// var current_video;
-
-
-
-//  Click on "make comment" to grab video info from DB
-// ????? Show associated comments
-
-// $('#make_comment').on('click', function(){
-
-
-
-
-// });
-
-
 
 $('#add_comment').on('click', function(){
 
@@ -151,9 +136,9 @@ $('#add_comment').on('click', function(){
   $.ajax({
     type: "POST", 
     dataType: "json", 
-    url: "/comment", 
+    url: "/comments", 
     data: {
-      timecode: "01:15", 
+      timecode: player.getCurrentTime(), 
       comment: $('#user_comment').val(),
       video_id:  current_video
     }
