@@ -4,49 +4,66 @@ var app = express();
 var bodyParser = require('body-parser'); 
 var logger = require('morgan'); 
 var mongoose = require('mongoose');
-var PORT = process.env.PORT || 3000; // Sets an initial port. We'll use this later in our listener
 
-// Run Morgan for Logging
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.text());
-app.use(bodyParser.json({type:'application/vnd.api+json'}));
-mongoose.Promise = Promise;
-app.use(express.static('./public'));
-
+// ========== passport ==========
+var path = require('path');  
+var passport = require('passport');
+var cookieParser = require('cookie-parser');  
+var flash = require('connect-flash');  
+var session = require('express-session');
+// ==============================
 //  For routes
 var videos = require('./routes/videos');  
 var comments = require('./routes/comments');
+var routes = require('./routes/index');  
+var users = require('./routes/users');
 
+
+var PORT = process.env.PORT || 3000; // Sets an initial port. We'll use this later in our listener
+
+// Run Morgan for Logging
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));  
+app.set('view engine', 'ejs');
+ 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser()); 
+mongoose.Promise = Promise;
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({ 
+    secret: 'shhsecret',
+    resave: true,
+    saveUninitialized: false
+ }));  
+app.use(passport.initialize());  
+app.use(passport.session());  
+require('./config/passport')(passport);
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-// Setting up mongoDB 
-mongoose.connect('mongodb://localhost/vonntest');
-var db = mongoose.connection;
-
-db.on('error', function (err) {
-	console.log('Mongoose Error: ', err);
-});
-
-db.once('open', function () {
-	console.log('Mongoose connection successful.');
-});
-
-var Video = require('./models/Video.js'); 
-var Comment = require('./models/Comment.js');
-
-
-// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-app.get('/', function(req, res){
-	res.sendFile('./public/index.html');
-});
 
 app.use('/comments', comments); 
 app.use('/videos', videos);
 
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+app.use('/', routes);  
+app.use('/users', users);
+
+
+
+mongoose.connect('mongodb://localhost/vonntest');
+var db = mongoose.connection;
+
+db.on('error', function (err) {
+  console.log('Mongoose Error: ', err);
+});
+
+db.once('open', function () {
+  console.log('Mongoose connection successful.');
+});
 
 app.listen(PORT, function() {
 	console.log("App listening on PORT: " + PORT);

@@ -1,0 +1,59 @@
+<% include partials/head %>
+
+  <body>
+    <div class="col-sm-8 col-sm-offset-2">
+      <div class="text-center">
+        <h1 class=" fa fa-user"> Profile</h1><br>
+        <span><strong>user id</strong>: <%= user._id ? user._id : '' %></span><br>
+        <span class="fa fa-sign-out"><a href="/"> Sign out</a></span>
+        <hr>
+        <div class="jumbotron">
+          <!-- Input URL -->
+            <input type="text" id="user_url" placeholder="Add URL Here!" />
+            <button id="addurl">Add URL</button>
+            <br /> 
+
+            <div id="get_id"></div>
+            <button id="get_user">Get User ID</button>
+            <br /> 
+
+
+          <!-- Player -->
+            <div id="video_url"></div>
+            <div id="youtube_id"></div>
+            
+            <div id="player"></div>
+
+
+          <!-- User Comments -->
+            <br />
+            
+            <div id="currenttime"></div>
+            <textarea id="user_comment"></textarea>
+
+            <button id="make_comment">Make Comment?</button>
+
+            <button id="add_comment">Add Comment</button>
+
+            <button id="consoletime">nice time console log</button>
+            <br /> 
+            <button id="seekto">Seek To</button>
+
+            <!-- actual comments should appear here -->
+            <div id="comment_area"></div>
+
+
+        </div>
+
+        <div>
+          <a href="/protected">Click for a secret</a> 
+        </div>
+
+      </div>
+    </div>
+              <!-- Scripts -->
+          <!--  <script src="video.js"></script>
+           -->  <script src="app.js"></script>
+
+  </body>
+</html>
