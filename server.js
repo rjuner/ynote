@@ -6,7 +6,6 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var PORT = process.env.PORT || 3000; // Sets an initial port. We'll use this later in our listener
 
-
 // Run Morgan for Logging
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -16,11 +15,9 @@ app.use(bodyParser.json({type:'application/vnd.api+json'}));
 mongoose.Promise = Promise;
 app.use(express.static('./public'));
 
-
 //  For routes
 var videos = require('./routes/videos');  
 var comments = require('./routes/comments');
-
 
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

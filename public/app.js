@@ -73,11 +73,7 @@ $(document).on('click', '#consoletime', function () {
   $('#currenttime').append(prettyTime);
 });
 
-
-
-
 var done = false;
-
 
 //  The API calls this function when the player's state changes.
 function onPlayerStateChange(event) {
