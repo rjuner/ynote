@@ -6,6 +6,9 @@ var Comment = require('../models/Comment.js')
 
 router.post('/', function(req, res) {
 
+  console.log("This is from /comments: ?"); 
+  console.log(req.body); 
+
   // use our Comment model to make a new note from the req.body
   var newcomment = new Comment(req.body);
   // Save the new note to mongoose

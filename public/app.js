@@ -1,3 +1,12 @@
+var tag = document.createElement('script');
+
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+var player;
+
+
 //  This code loads the IFrame Player API code asynchronously.
 $(document).ready(function(){
     var userId;
@@ -8,7 +17,7 @@ $(document).ready(function(){
         url: '/user', 
     }).then(function(response){
         userId = response._id
-        console.log("USER ID",userId)
+        console.log("USER ID",userId);
         var tag = document.createElement('script');
 
         var current_video;
@@ -153,7 +162,7 @@ $(document).ready(function(){
         $('#add_comment').on('click', function(){
 
           console.log("Comment... ");
-
+          
           var comment = $('#user_comment').val();
 
           $.ajax({
