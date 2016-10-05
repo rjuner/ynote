@@ -5,6 +5,7 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var player;
+var myTimer; 
 
 
 //  This code loads the IFrame Player API code asynchronously.
@@ -16,7 +17,7 @@ $(document).ready(function(){
         dataType: "json", 
         url: '/user', 
     }).then(function(response){
-        userId = response._id
+           userId = response._id
         console.log("USER ID",userId);
         var tag = document.createElement('script');
 
@@ -30,16 +31,26 @@ $(document).ready(function(){
         var player;
 
         // load actual player with id
-        function makePlayer(id){
-          player = new YT.Player('player', {
-            height: '390',
-            width: '640',
-            videoId: id,
-            events: {
-              'onReady': onPlayerReady,
-              'onStateChange': onPlayerStateChange
+        function makePlayer(id, url){
+            if(player){
+                player.stopVideo();
+                console.log("i be player",player.a.src);
+               var newSrc = player.a.src.replace(linkifyYouTubeURLs(player.a.src), id);
+               player.a.src = newSrc;
+               console.log("new id: ",player.a.src, id)
+               $(document).trigger("src-change", [id]);
+            } else {
+                player = new YT.Player('player', {
+                    height: '390',
+                    width: '640',
+                    videoId: id,
+                    events: {
+                      'onReady': onPlayerReady,
+                      'onStateChange': onPlayerStateChange
+                    }
+                });
             }
-          });
+           
         }
 
         // convert youtube time to minutes:seconds
@@ -54,6 +65,23 @@ $(document).ready(function(){
           return (minutes + ":" + seconds);
 
         }
+
+        $(document).on("src-change", function(event, videoID){
+            console.log("trigger?")
+            $.ajax({
+              type: "GET", 
+              dataType: "json", 
+              url: "/comments/getcomments/"+ videoID, 
+            }).then(function(data){
+                console.log(data);
+                $('#comment_area').html("");
+                if(data.comments){
+                    data.comments.forEach(function(comments){
+                        $('#comment_area').prepend('<p>' + comments.user.google.name + ": " + comments.comment + '</p>' + '</br>'); 
+                    });
+                }
+            });
+        });
 
         // get current time in minutes:seconds format
         function getvideoseconds(){
@@ -96,9 +124,19 @@ $(document).ready(function(){
 
         //  The API calls this function when the player's state changes.
         function onPlayerStateChange(event) {
-          if (event.data == YT.PlayerState.PLAYING && !done) {
-            var videoTime = event.target.getCurrentTime();
-          }
+            if (event.data == YT.PlayerState.PLAYING && !done) {
+                var videoTime = event.target.getCurrentTime();
+            }
+
+            if(event.data==1) { // playing
+                myTimer = setInterval(function(){ 
+                    var time;
+                    time = player.getCurrentTime();
+                    $("#timeHolder").text(time);
+                }, 100);
+            } else { // not playing
+                clearInterval(myTimer);
+            }
         }
 
         function stopVideo() {
@@ -128,7 +166,7 @@ $(document).ready(function(){
 
         // when you click the addurl button
         // add to database
-
+        
         $(document).on('click', '#addurl', function(){
 
           console.log("I'm working!");
@@ -136,53 +174,49 @@ $(document).ready(function(){
           var mainurl = $('#user_url').val()
 
           var thisistheid = linkifyYouTubeURLs(mainurl);
-          makePlayer(thisistheid);
+          makePlayer(thisistheid, mainurl);
 
-          $.ajax({
-            type: "POST",
-            dataType: "json", 
-            url: '/videos/videos', 
-            data: {
-              yt_url: $('#user_url').val(),
-              duration: 'duration', 
-              yt_id: thisistheid 
-            }
-          }).done(function(data){
-            console.log("I'm the video: ",data);
-            current_video = data._id;
-            // $('#get_id').val(user._id);
-            $('#user_url').val("");
-            data.comments.forEach(function(comments){
-              $('#comment_area').prepend('<p>' + comments.user.google.name +": "+ comments.comment + '</p>' + '</br>'); 
-
-          });
+            $.ajax({
+                type: "POST",
+                dataType: "json", 
+                url: '/videos', 
+                data: {
+                  yt_url: $('#user_url').val(),
+                  duration: 'duration', 
+                  yt_id: thisistheid 
+                }
+            }).done(function(data){
+                console.log("I'm the video: ",data);
+                current_video = data._id;
+                // $('#get_id').val(user._id);
+                $('#user_url').val("");
+                data.comments.forEach(function(comments){
+                    $('#comment_area').prepend('<p>' + comments.user.google.name +": "+ comments.comment + " " + comments.timecode + '</p>' + '</br>'); 
+                });
+            });
         });
-
 
         $('#add_comment').on('click', function(){
 
-          console.log("Comment... ");
-          
-          var comment = $('#user_comment').val();
-
-          $.ajax({
-            type: "POST", 
-            dataType: "json", 
-            url: "/comments", 
-            data: {
-              timecode: player.getCurrentTime(), 
-              comment: $('#user_comment').val(),
-              video_id:  current_video,
-              user: userId
-            }
-          }).done(function(data){
-            console.log("comment?",data);
-            $('#comment_area').html("");
-            data.comments.forEach(function(comments){
-                $('#comment_area').prepend('<p>' + comments.user.google.name + ": " + comments.comment + '</p>' + '</br>'); 
+            console.log("App.js adding a comment... ");
+            
+            var comment = $('#user_comment').val();
+            $.ajax({
+              type: "POST", 
+              dataType: "json", 
+              url: "/comments", 
+              data: {
+                timecode: player.getCurrentTime(), 
+                comment: $('#user_comment').val(),
+                video_id:  current_video,
+                user: userId
+              }
+            }).then(function(data){
+                $('#comment_area').html("");
+                data.comments.forEach(function(comments){
+                    $('#comment_area').prepend('<p>' + comments.user.google.name + ": " + comments.comment + " " + getvideoseconds(comments.comment.timecode) + '</p>' + '</br>'); 
+                });
             });
-            });
-          });
         });
     });
 });

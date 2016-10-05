@@ -15,9 +15,9 @@ router.get('/user', isLoggedIn, function (req, res) {
 })
 
 router.get('/profile', isLoggedIn, function(req, res) {  
-  console.log(req.user.email);
+  // console.log(req.user.email);
   //  logs to the server current user's info 
-  console.log(req.session);
+  // console.log(req.session);
   res.render('profile.ejs', { user: req.user });
 });
 
@@ -49,8 +49,8 @@ function isLoggedIn(req, res, next) {
 }
 
 router.get('/protected', isLoggedIn, function(req, res){
-  console.log("mH UAER!",req.user._);
-  console.log("mH huihiuhuhu!",req.passport);
+  console.log("mH UAER!",req.user._id);
+  console.log("mH huihiuhuhu!",req.user.passport);
   res.send("access granted. secure stuff happens here.");
 });
 

@@ -22,11 +22,13 @@ router.get('/owner', isLoggedIn, function (req, res) {
 
 
 
-router.post('/videos', function(req, res){
+router.post('/', function(req, res){
+    // console.log(req.body);
+    // res.send("This is from /videos/videos: ");
+    
+	   // console.log("This is from /submit: "); 
 
-	console.log("This is from /submit: "); 
-	console.log(req.body);
-  console.log("dis b user",req.user);
+    // console.log("dis b user",req.user);
 
   var query = {
     yt_id: req.body.yt_id
@@ -45,6 +47,7 @@ router.post('/videos', function(req, res){
         res.json(video);
       } else {
         var newVideoRaw = req.body;
+        console.log("who is this?!",req.user)
         newVideoRaw.owner_id = req.user._id;
 
         var newVideo = new Video(newVideoRaw);
@@ -56,12 +59,18 @@ router.post('/videos', function(req, res){
             res.send(err);
           } else {
             console.log('Saved!');
-            res.send(saved);
+            Video.findOne(query).populate({
+              path: "comments",
+              populate: {path:"user"}
+            }).exec(function(err, video){
+                res.send(video);
+            })
           }
         });
       }
     }
   });
+
 });
 
 module.exports = router; 
