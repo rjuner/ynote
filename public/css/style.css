@@ -1,0 +1,98 @@
+body { 
+	padding-top: 50px; 
+	background-color: #333333;
+	color: white;
+	font-family: 'Work Sans', sans-serif !important;
+}
+
+h1{
+	font-family: 'Archivo Black', sans-serif !important;
+	font-size: 150px;
+}
+
+h2, h3, h4, h5, h6 {
+	font-family: 'Work Sans', sans-serif !important;
+}
+
+p, div {
+	font-family: 'Work Sans', sans-serif !important;
+}
+
+a:link {
+	color: white;
+}
+
+/* visited link */
+a:visited {
+	color: white;
+}
+
+/* mouse over link */
+a:hover {
+	color: #FF3C0D;
+}
+
+/* selected link */
+a:active {
+	color: yellow;
+}
+
+.fa-sign-out {
+	float: right;
+}
+
+#navbar-body {
+  background: #49a09d; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, #333366 , #FF0000); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #333366, #FF0000); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #333366, #FF0000); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #333366 , #FF0000); /* Standard syntax */
+}
+
+#footer-body{
+	opacity: 0.5;
+}
+
+#comment_container{
+	height:75%;
+}
+
+video#bgvid { 
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	z-index: -100;
+	-ms-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+	background-size: cover; 
+}
+
+#index_content{
+	margin-top: 60px;
+
+}
+
+#url_container{
+	padding-top:20px;
+}
+
+#user_url{
+	width: 100%;
+}
+
+#fox{
+	width: 640px;
+	height: 360px;
+}
+
+#user_comment{
+	margin: 15px;
+	width:100%;
+	height: auto;
+}

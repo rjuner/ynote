@@ -49,4 +49,19 @@ router.get('/getcomments/:id', function(req, res){
   })
 })
 
+// grabs all comments in timecode order
+router.get('/allcomments', function(req, res){
+
+  Comment.find().sort('timecode')
+    .exec(function(err,doc){
+
+      if(err){
+        console.log(err);
+      } else {
+        res.send(doc);
+      }
+    })
+});
+
+
 module.exports = router; 

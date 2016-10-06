@@ -1,64 +1,88 @@
 <% include partials/head %>
 
-  <body>
-    <div class="col-sm-8 col-sm-offset-2">
-      <div class="text-center">
-        <h1 class=" fa fa-user"> Profile</h1><br>
-        <span><strong>user id</strong>: <%= user._id ? user._id : '' %></span><br>
-        <span class="fa fa-sign-out"><a href="/"> Sign out</a></span>
-        <hr>
-        <div class="jumbotron">
-          <!-- Input URL -->
-            <input type="text" id="user_url" placeholder="Add URL Here!" />
-            <button id="addurl">Add URL</button>
-            <br /> 
+<% include partials/navbar %>
 
-            <div id="get_id"></div>
-          <!--  <button id="get_user">Get User ID</button> -->
-            <br /> 
+<body>
+	<div class="container">
+
+		<div id="url_container" class="row">
+			<div class="col-sm-4">
+				<span><strong>Logged in as</strong>: <%= user.google.name ? user.google.name : '' %></span><br>
+			</div>
+
+			<div class="col-sm-8">
+				<input type="text" id="user_url" placeholder="Add URL Here!" />
+				<button id="addurl">Add URL</button>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-8">
+
+				<!-- Input URL -->
+			
+				<div id="get_id" name="url_name" required></div>
+				<!--  <button id="get_user">Get User ID</button> -->
+				<br /> 
+
+				<!-- Player -->
+				<div id="video_url"></div>
+				<div id="youtube_id"></div>
+				<div id="player"><img id="fox" src="/img/fox_holder.jpg" /></div>
+
+				<div class="row">
+					<div class="col-sm-2">
+						<div id="test">
+						<!-- Comment Box -->
+							<div id="currenttime"></div>
+							<div id="timeHolder"></div>
+						</div>
+					</div>
+
+					<div class="col-sm-10">
+						<div id="test">
+						<!-- Comment Box -->
+							<textarea id="user_comment"></textarea>
+							<button id="add_comment">Add Comment</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div id="comment_container" class="col-sm-4">
 
 
-          <!-- Player -->
-            <div id="video_url"></div>
-            <div id="youtube_id"></div>
-            
-            <div id="player"></div>
-            
+				<!-- User Comments -->
 
-          <!-- User Comments -->
-            <br />
+				<h5>Comments here:</h5>
+
+				<!-- <button id="make_comment">Make Comment?</button> -->
 
 
-            <div id="currenttime"></div>
-            <div id="timeHolder"></div>
-            <textarea id="user_comment"></textarea>
+				<!-- <button id="consoletime">nice time console log</button>
+				<br /> 
+				<button id="seekto">Seek To</button> -->
 
-            <!-- <button id="make_comment">Make Comment?</button> -->
+				<!-- actual comments should appear here -->
+				
+				<!-- React stuff  -->
 
-            <button id="add_comment">Add Comment</button>
+				<div id="comment_area"></div>
 
-            <button id="consoletime">nice time console log</button>
-            <br /> 
-            <button id="seekto">Seek To</button>
+				<div id="app"></div>		
+			</div>
+		</div>
 
-            <!-- actual comments should appear here -->
-            <!-- React stuff  -->
-            <div id="app"></div>
+	</div>
 
-            <div id="comment_area"></div>
+	<div>
+	<% include partials/footer %>
+	</div>
 
+	<!-- App Scripts -->
+	<script src="bundle.js"></script>
+	<script src="app.js"></script>
 
-        </div>
-
-        <div>
-          <a href="/protected">Click for a secret</a> 
-        </div>
-
-      </div>
-    </div>
-             <script src="bundle.js"></script>
-
-            <script src="app.js"></script>
-
-  </body>
+</body>
 </html>

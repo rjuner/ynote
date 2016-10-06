@@ -71,6 +71,19 @@ router.post('/', function(req, res){
     }
   });
 
+router.get('/thisusersvids', function(req, res){
+
+  Video.find({'yt_id': 'rxebYxY9NXE'})
+    .exec(function(err,doc){
+      if(err){
+        console.log(err);
+      } else {
+        res.send(doc);
+      }
+    })
+
+});
+
 });
 
 module.exports = router; 

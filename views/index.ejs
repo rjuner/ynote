@@ -1,10 +1,41 @@
-<% include partials/head %>  
-  <body>
-    <div class="col-sm-8 col-sm-offset-2">
-      <div class="jumbotron text-center">
-        <h1>Express Authentication</h1>
-        <p class="lead">A simple authentication app built with express, node & passport.</p>
-        <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
-    </div>
-  </body>
+<!DOCTYPE html>  
+<html>  
+
+<head>
+	<% include partials/head %>  
+</head>
+
+<body>
+
+	<video playsinline autoplay muted loop id="bgvid">
+	<source src="vid/279739896.mp4" type="video/mp4">
+	</video>
+
+
+	<!-- Navigation -->
+	<% include partials/navbar %>
+
+
+	<div id="index_content" class="container-fluid">
+
+		<div class="row">
+			<div class="col-sm-12 text-center">
+
+				<h1>VONN</h1>
+				<h2>Simple Video Annotation</h2>
+				<p class="lead">An agency focused solution to client/creative collaboration.</p>
+				<p> Login below: </p>
+				<a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div>
+		<% include partials/footer %>
+	</div>
+
+</body>
+
 </html>  
