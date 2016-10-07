@@ -1,13 +1,16 @@
 {
   "name": "vonn",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A simple video annotation app.",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Rhea Rivera",
   "license": "ISC",
+  "engines": {
+    "node":"6.2.2"
+  }, 
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
