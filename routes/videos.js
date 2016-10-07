@@ -1,8 +1,8 @@
-var Video = require('../models/Video.js');
-var Comment = require('../models/Comment.js')
-
 var express = require('express');
 var router = express.Router();
+
+var Video = require('../models/Video.js');
+var Comment = require('../models/Comment.js')
 
 function isLoggedIn(req, res, next) {  
   if (req.isAuthenticated()){
@@ -71,18 +71,11 @@ router.post('/', function(req, res){
     }
   });
 
-router.get('/thisusersvids', function(req, res){
+  router.get('/test', isLoggedIn, function(req, res){
 
-  Video.find({'yt_id': 'rxebYxY9NXE'})
-    .exec(function(err,doc){
-      if(err){
-        console.log(err);
-      } else {
-        res.send(doc);
-      }
-    })
-
-});
+    console.log(req.body);
+    
+  });
 
 });
 

@@ -53,11 +53,21 @@ $(document).ready(function(){
 					 
 				}
 
+				function convertSecondsToReadableTime(time) {
+					time = parseFloat(time);
+					var mins = time/60;
+					if(mins < 0) {
+						mins = 0; 
+					}
+					var seconds = (mins - Math.floor(mins))*60;
+					return mins + ":" + Math.floor(seconds);
+				}
+
 				// convert youtube time to minutes:seconds
 				function converttoseconds(youtubetime){
 					var videoTime = Math.round(youtubetime);
 
-					var minutes = Math.floor(videoTime / 60); 
+					var minutes = Math.floor(youtubetime / 60); 
 					var seconds = videoTime - minutes * 60;
 
 					seconds = seconds < 10 ? '0' + seconds : seconds;
@@ -67,7 +77,7 @@ $(document).ready(function(){
 				}
 
 				$(document).on("src-change", function(event, videoID){
-						console.log("trigger?")
+						// console.log("trigger?")
 						$.ajax({
 							type: "GET", 
 							dataType: "json", 
@@ -84,9 +94,8 @@ $(document).ready(function(){
 				});
 
 				// get current time in minutes:seconds format
-				function getvideoseconds(){
-					var rawtime = player.getCurrentTime();
-					return converttoseconds(rawtime);
+				function getvideoseconds(timecode){
+					return converttoseconds(parseFloat(timecode));
 				}
 
 				function onYouTubeIframeAPIReady(){
@@ -108,9 +117,14 @@ $(document).ready(function(){
 					return yt_duration;
 				}
 
-				$('#seekto').on('click', function(){
-					console.log("I'm working!");
-					player.seekTo(817.917613, true);
+				$(document).on('click', 'a.jump', function(event){
+
+					var linktojump = $(this).data("id");
+
+					console.log;
+					// console.log("I'm working!!!!");
+					// console.log(event.target); 
+					player.seekTo(linktojump, true);
 				});
 
 				//  This anonymous function makes the seconds nice
@@ -132,8 +146,8 @@ $(document).ready(function(){
 								myTimer = setInterval(function(){ 
 										var time;
 										time = player.getCurrentTime();
-										$("#timeHolder").text(time);
-								}, 100);
+										$("#timeHolder").text(getvideoseconds(time));
+								}, 1050);
 						} else { // not playing
 								clearInterval(myTimer);
 						}
@@ -156,7 +170,7 @@ $(document).ready(function(){
 				
 				$(document).on('click', '#addurl', function(){
 
-					console.log("I'm working!");
+					// console.log("I'm working!");
 
 					var mainurl = $('#user_url').val()
 
@@ -173,19 +187,19 @@ $(document).ready(function(){
 									yt_id: thisistheid 
 								}
 						}).done(function(data){
-								console.log("I'm the video: ",data);
+								// console.log("I'm the video: ",data);
 								current_video = data._id;
 								// $('#get_id').val(user._id);
 								$('#user_url').val("");
 								data.comments.forEach(function(comments){
-										$('#comment_area').prepend('<p>' + comments.user.google.name +": "+ comments.comment + " " + comments.timecode + '</p>' + '</br>'); 
+										$('#comment_area').prepend('<p>' + comments.user.google.name +": "+ comments.comment + " " + '</p>' + "<a class='jump' data-id='" + comments.timecode + "'>" +  getvideoseconds(comments.timecode) + '</p>' + '</br>'); 
 								});
 						});
 				});
 
 				$('#add_comment').on('click', function(){
 
-						console.log("App.js adding a comment... ");
+						// console.log("App.js adding a comment... ");
 						
 						var comment = $('#user_comment').val();
 						$.ajax({
@@ -201,7 +215,7 @@ $(document).ready(function(){
 						}).then(function(data){
 								$('#comment_area').html("");
 								data.comments.forEach(function(comments){
-										$('#comment_area').prepend('<p>' + comments.user.google.name + ": " + comments.comment + " " + getvideoseconds(comments.comment.timecode) + '</p>' + '</br>'); 
+										$('#comment_area').prepend('<p>' + comments.user.google.name + ": " + comments.comment + " " + '</p>' + "<a class='jump' data-id='" + comments.timecode + "'>" + getvideoseconds(comments.timecode) + "</a>"); 
 								});
 						});
 				});
