@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var CommentSchema = new Schema({
   timecode: {
-    type:String,
+    type: Number,
     required: true
   }, 
   comment:{

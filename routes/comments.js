@@ -44,7 +44,7 @@ router.post('/', function(req, res) {
 });
 
 router.get('/getcomments/:id', function(req, res){
-  Comment.find({yt_id: req.params.id}).exec(function(err, doc){
+  Comment.find({yt_id: req.params.id}).sort('timecode').exec(function(err, doc){
     res.json(doc);
   })
 })
