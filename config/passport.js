@@ -1,6 +1,6 @@
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;  
 var User = require('../models/User.js');  
-var configAuth = require('./auth');  
+var configAuth = require('./auth.js');  
 
 module.exports = function(passport) {  
   passport.serializeUser(function(user, done) {

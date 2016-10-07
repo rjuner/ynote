@@ -56,8 +56,8 @@ app.use('/users', users);
 
 
 
-// mongoose.connect('mongodb://localhost/vonntest');
-mongoose.connect('mongodb://heroku_rgk5x3qx:v40dmcp3h6c99f3q5krop2a40o@ds033066.mlab.com:33066/heroku_rgk5x3qx');
+mongoose.connect('mongodb://localhost/vonntest');
+// mongoose.connect('mongodb://heroku_rgk5x3qx:v40dmcp3h6c99f3q5krop2a40o@ds033066.mlab.com:33066/heroku_rgk5x3qx');
 
 var db = mongoose.connection;
 
