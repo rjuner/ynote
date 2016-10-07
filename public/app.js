@@ -86,9 +86,12 @@ $(document).ready(function(){
 								console.log(data);
 								$('#comment_area').html("");
 								if(data.comments){
-										data.comments.forEach(function(comments){
-												$('#comment_area').prepend('<p>' + comments.user.google.name + ": " + comments.comment + '</p>' + '</br>'); 
-										});
+									$('#comment_area').prepend(
+										'<p class="comments_id" data-id="' + comments._id +'">' + comments.user.google.name + ': '+ 
+										comments.comment + '' + '<span class="deleter"> X </span>' + 
+										"<a class='jump' data-id='" + comments.timecode + "'>" + 
+										getvideoseconds(comments.timecode) + "</a>" + "</p>"
+									); 
 								}
 						});
 				});
@@ -195,7 +198,12 @@ $(document).ready(function(){
 								// $('#get_id').val(user._id);
 								$('#user_url').val("");
 								data.comments.forEach(function(comments){
-										$('#comment_area').prepend('<p>' + comments.user.google.name +": "+ comments.comment + " " + '</p>' + "<a class='jump' data-id='" + comments.timecode + "'>" +  getvideoseconds(comments.timecode) + '</p>' + '</br>'); 
+									$('#comment_area').prepend(
+										'<p class="comments_id" data-id="' + comments._id +'">' + comments.user.google.name + ': '+ 
+										comments.comment + '' + '<span class="deleter"> X </span>' + 
+										"<a class='jump' data-id='" + comments.timecode + "'>" + 
+										getvideoseconds(comments.timecode) + "</a>" + "</p>"
+									); 
 								});
 						});
 				});
