@@ -117,6 +117,9 @@ $(document).ready(function(){
 					return yt_duration;
 				}
 
+
+
+				// This creates the clickable links in the comment area
 				$(document).on('click', 'a.jump', function(event){
 
 					var linktojump = $(this).data("id");
@@ -197,6 +200,7 @@ $(document).ready(function(){
 						});
 				});
 
+				// Adds the actual comments on screen & to database
 				$('#add_comment').on('click', function(){
 
 						// console.log("App.js adding a comment... ");
@@ -215,9 +219,30 @@ $(document).ready(function(){
 						}).then(function(data){
 								$('#comment_area').html("");
 								data.comments.forEach(function(comments){
-										$('#comment_area').prepend('<p>' + comments.user.google.name + ": " + comments.comment + " " + '</p>' + "<a class='jump' data-id='" + comments.timecode + "'>" + getvideoseconds(comments.timecode) + "</a>"); 
+									$('#comment_area').prepend(
+										'<p class="comments_id" data-id="' + comments._id +'">' + comments.user.google.name + ': '+ 
+										comments.comment + '' + '<span class="deleter"> X </span>' + 
+										"<a class='jump' data-id='" + comments.timecode + "'>" + 
+										getvideoseconds(comments.timecode) + "</a>" + "</p>"); 
 								});
 						});
 				});
+
+
+				// Should delete the comment
+				$(document).on('click', '.deleter', function(){
+
+					var selected = $(this).parent(); 
+
+					$.ajax({
+						type: "GET", 
+						url: '/comments/delete/' + selected.data('id'), 
+
+						success: function(response){
+							selected.remove(); 
+						}
+					})
+				});
+
 		});
 });

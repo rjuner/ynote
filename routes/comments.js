@@ -49,6 +49,20 @@ router.get('/getcomments/:id', function(req, res){
   })
 })
 
+
+router.get('/delete/:id', function(req, res){
+  Comment.remove({"_id": req.params.id}).exec(function(err, removed){
+    if(err) {
+      // console.log(err); 
+      res.send(err)
+    } else{
+      // console.log(removed);
+      res.send(removed);
+    }
+  })
+});
+
+
 // grabs all comments in timecode order
 router.get('/allcomments', function(req, res){
 

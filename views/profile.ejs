@@ -19,19 +19,19 @@
 		<div class="row">
 			<div class="col-sm-8">
 
-				<!-- Input URL -->
-			
+				<!-- Input URL -->	
 				<div id="get_id" name="url_name" required></div>
-				<!--  <button id="get_user">Get User ID</button> -->
 				<br /> 
 
 				<!-- Player -->
 				<div id="video_url"></div>
 				<div id="youtube_id"></div>
-				<div id="player"><img id="fox" src="/img/fox_holder.jpg" /></div>
+				<div class="video-wrapper">
+					<img id="fox" src="/img/fox_holder.jpg" />
+					<div id="player"></div>
+				</div>
 
-<!-- 				<div class="row">
- -->					<div class="col-sm-2">
+					<div class="col-sm-2">
 						<div id="test">
 						<!-- Comment Box -->
 							<div id="currenttime"></div>
@@ -46,9 +46,7 @@
 							<button id="add_comment">Add Comment</button>
 						</div>
 					</div>
-
-<!-- 				</div>
- -->			</div>
+			</div>
 
 			<div id="comment_container" class="col-sm-4">
 
