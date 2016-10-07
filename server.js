@@ -19,7 +19,9 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 
-var PORT = process.env.PORT || 3000; // Sets an initial port. We'll use this later in our listener
+// var PORT = process.env.PORT || 3000; // Sets an initial port. We'll use this later in our listener
+
+app.set()
 
 // Run Morgan for Logging
 // view engine setup
@@ -67,6 +69,6 @@ db.once('open', function () {
   console.log('Mongoose connection successful.');
 });
 
-app.listen(process.env.PORT || 3000 , function() {
-	console.log("App listening on PORT: " + PORT);
+app.listen(process.env.PORT || 3000, function() {
+	console.log("App listening to default PORT");
 });
