@@ -59,7 +59,8 @@ a:active {
 }
 
 #footer-body{
-	opacity: 0.5;
+	background: 0;
+	padding-top: 10px;
 }
 
 #comment_container{
@@ -101,8 +102,11 @@ video#bgvid {
 }
 
 #fox{
-	width: 640px;
-	height: 360px;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
 }
 
 #user_container{
@@ -118,7 +122,9 @@ video#bgvid {
 	color: #FFFFFF;
 }
 
-
+p.comments_id:target{
+	background-color: : yellow;
+}
 
 #add_comment{
 	float: right;
