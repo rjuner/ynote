@@ -41,6 +41,15 @@ a:active {
 	float: right;
 }
 
+.glyphicon-ban-circle{
+	color: red;
+}
+
+#timeHolder{
+	font-size: 40px;
+	margin-top: 5px;
+}
+
 #navbar-body {
   background: #49a09d; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(left, #333366 , #FF0000); /* For Safari 5.1 to 6.0 */
@@ -84,7 +93,11 @@ video#bgvid {
 }
 
 #user_url{
-	width: 75%;
+	width: 50%;
+	background: 0;
+	border: 0;
+	border-bottom: 1px solid #FFFFFF;
+	color: #FFFFFF;
 }
 
 #fox{
@@ -92,10 +105,23 @@ video#bgvid {
 	height: 360px;
 }
 
+#user_container{
+	margin-top: 15px;
+}
+
 #user_comment{
 	margin: 15px;
 	width:100%;
 	height: auto;
+	background: #474747;
+	border: 0;
+	color: #FFFFFF;
+}
+
+
+
+#add_comment{
+	float: right;
 }
 
 .video-wrapper {

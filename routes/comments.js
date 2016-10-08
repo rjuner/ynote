@@ -63,6 +63,21 @@ router.get('/delete/:id', function(req, res){
 });
 
 
+router.get('/find/:id', function(req, res){
+  Comment.findOne({
+    '_id':req.params.id
+  }, function(err, found){
+    if(err){
+      console.log(err);
+      res.send(err);
+    } else{
+      console.log(found);
+      res.send(found);
+    }
+  });
+});
+
+
 // grabs all comments in timecode order
 router.get('/allcomments', function(req, res){
 

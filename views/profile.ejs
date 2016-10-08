@@ -5,12 +5,16 @@
 <body>
 	<div class="container">
 
-		<div id="url_container" class="row">
-			<div class="col-sm-4">
+		<div id="user_container" class="row">
+			<div class="col-sm-12">
 				<span><strong>Logged in as</strong>: <%= user.google.name ? user.google.name : '' %></span><br>
 			</div>
+		</div>
 
-			<div class="col-sm-8">
+
+		<div id="url_container" class="row">
+
+			<div class="col-sm-12">
 				<input type="text" id="user_url" placeholder="Add URL Here!" />
 				<button id="addurl">Add URL</button>
 			</div>

@@ -228,14 +228,34 @@ $(document).ready(function(){
 								$('#comment_area').html("");
 								data.comments.forEach(function(comments){
 									$('#comment_area').prepend(
-										'<p class="comments_id" data-id="' + comments._id +'">' + comments.user.google.name + ': '+ 
-										comments.comment + '' + '<span class="deleter"> X </span>' + 
+										'<p class="comments_id" data-id="' + comments._id +'">' +'<span class="glyphicon glyphicon-ban-circle deleter" aria-hidden="true"></span>' + " " + comments.user.google.name + ': '+ 
+										comments.comment + '   ' + 
 										"<a class='jump' data-id='" + comments.timecode + "'>" + 
 										getvideoseconds(comments.timecode) + "</a>" + "</p>"); 
 								});
 						});
 				});
 
+
+
+
+
+				//	Shows comment of object you click on
+				$(document).on('click', '.comments_id', function(){
+					// console.log("You're clicking on: ");
+					// console.log($(this).data('id'));
+
+					var selected = $(this);
+
+					$.ajax({
+						type: "GET",
+						url: 'comments/find/' + selected.data('id'),
+						success: function(data){
+							// fill the inputs with the data that the ajax call collected
+							$('#user_comment').val(data.comment);
+						}
+					});
+				});
 
 				// Should delete the comment
 				$(document).on('click', '.deleter', function(){
