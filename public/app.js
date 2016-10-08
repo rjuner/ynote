@@ -87,11 +87,10 @@ $(document).ready(function(){
 								$('#comment_area').html("");
 								if(data.comments){
 									$('#comment_area').prepend(
-										'<p class="comments_id" data-id="' + comments._id +'">' + comments.user.google.name + ': '+ 
-										comments.comment + '' + '<span class="deleter"> X </span>' + 
+										'<p class="comments_id" data-id="' + comments._id +'">' +'<span class="glyphicon glyphicon-ban-circle deleter" aria-hidden="true"></span>' + " " + comments.user.google.name + ': '+ 
+										comments.comment + '   ' + 
 										"<a class='jump' data-id='" + comments.timecode + "'>" + 
-										getvideoseconds(comments.timecode) + "</a>" + "</p>"
-									); 
+										getvideoseconds(comments.timecode) + "</a>" + "</p>"); 
 								}
 						});
 				});
@@ -199,11 +198,10 @@ $(document).ready(function(){
 								$('#user_url').val("");
 								data.comments.forEach(function(comments){
 									$('#comment_area').prepend(
-										'<p class="comments_id" data-id="' + comments._id +'">' + comments.user.google.name + ': '+ 
-										comments.comment + '' + '<span class="deleter"> X </span>' + 
+										'<p class="comments_id" data-id="' + comments._id +'">' +'<span class="glyphicon glyphicon-ban-circle deleter" aria-hidden="true"></span>' + " " + comments.user.google.name + ': '+ 
+										comments.comment + '   ' + 
 										"<a class='jump' data-id='" + comments.timecode + "'>" + 
-										getvideoseconds(comments.timecode) + "</a>" + "</p>"
-									); 
+										getvideoseconds(comments.timecode) + "</a>" + "</p>"); 
 								});
 						});
 				});
