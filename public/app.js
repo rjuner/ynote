@@ -155,6 +155,7 @@ $(document).ready(function(){
 								}, 1050);
 						} else { // not playing
 								clearInterval(myTimer);
+
 						}
 				}
 
@@ -251,6 +252,7 @@ $(document).ready(function(){
 						success: function(data){
 							// fill the inputs with the data that the ajax call collected
 							$('#user_comment').val(data.comment);
+							$('#actionbutton').html('<button class="updater" data-id="'+ data._id +'">Update</button>');
 						}
 					});
 				});
@@ -270,5 +272,48 @@ $(document).ready(function(){
 					})
 				});
 
+				$(document).on('click', '.updater', function(){
+					var selected = $(this); 
+					var updated_comment = $('#user_comment').val();
+
+
+					// console.log("this is from THIS: ");
+					// console.log(selected.data('id'));
+					// console.log(selected);
+
+
+					$.ajax({
+						type: "POST", 
+						url: '/comments/update/' + selected.data('id'), 
+						dataType: "json", 
+						data: {
+							comment: $('#user_comment').val()
+						}, 
+						success: function(data){
+
+
+							// console.log("this is from data omg: ");
+							// console.log(data);
+							// console.log($('p[data-id="' + selected.data('id') + '"'));
+							// console.log("This is from the .attr: "); 
+
+							$('p[data-id="' + selected.data('id') + '"').html('<span class="glyphicon glyphicon-ban-circle deleter" aria-hidden="true"></span>' + " " + data.user.google.name  + ': '+
+										data.comment + '   ' + 
+										"<a class='jump' data-id='" + data.timecode + "'>" + 
+										getvideoseconds(data.timecode) + "</a>");
+	
+
+							// $(selected.data('id')).replaceWith('<p>'+ updated_comment + '</p>');
+
+
+							// console.log(data.comments.find({_id:selected.data('id')}));
+
+							// selected.remove();
+
+
+						}
+					});
+				});
+
 		});
-});
+}); // big document ready at the top ends

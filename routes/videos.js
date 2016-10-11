@@ -17,6 +17,13 @@ router.get('/contributor', isLoggedIn, function (req, res) {
 })
 
 router.get('/owner', isLoggedIn, function (req, res) {
+  Video.find({owner_id:req.user._id}).exec(function(err,doc){
+        if(err){
+          console.log(err);
+        } else {
+          res.send(doc);
+        }
+      })
   // return all videos where owner_id === req.user._id
 })
 

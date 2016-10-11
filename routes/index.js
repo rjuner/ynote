@@ -21,6 +21,13 @@ router.get('/profile', isLoggedIn, function(req, res) {
   res.render('profile.ejs', { user: req.user });
 });
 
+router.get('/uservids', isLoggedIn, function(req, res) {  
+  // console.log(req.user.email);
+  //  logs to the server current user's info 
+  // console.log(req.session);
+  res.render('uservids.ejs', { user: req.user });
+});
+
 //++++++++++++++++++++++++++++++++++++++++++++++++
 
 // router.get('/landing', function(req, res){

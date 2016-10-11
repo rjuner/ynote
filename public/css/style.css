@@ -65,7 +65,8 @@ a:active {
 
 #comment_container{
 	height:75%;
-	overflow: scroll;
+	overflow-x: hidden;
+	overflow-y: scroll;
 }
 
 video#bgvid { 
