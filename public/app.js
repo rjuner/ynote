@@ -34,7 +34,7 @@ $(document).ready(function(){
 				function makePlayer(id, url){
 						if(player){
 								player.stopVideo();
-								console.log("i be player",player.a.src);
+								console.log("the player: ",player.a.src);
 							 var newSrc = player.a.src.replace(linkifyYouTubeURLs(player.a.src), id);
 							 player.a.src = newSrc;
 							 console.log("new id: ",player.a.src, id)

@@ -3,7 +3,7 @@
 <% include partials/navbar %>
 
 <body>
-	<div class="container">
+	<div id="content-wrap" class="container">
 
 		<div id="user_container" class="row">
 			<div class="col-sm-12">
@@ -15,7 +15,7 @@
 		<div id="url_container" class="row">
 
 			<div class="col-sm-12">
-				<input type="text" id="user_url" placeholder="Add URL Here!" />
+				<input type="text" id="user_url" placeholder="https://www.youtube.com/watch?v=exampleID" />
 				<button id="addurl">Add URL</button>
 			</div>
 		</div>
@@ -31,7 +31,7 @@
 				<div id="video_url"></div>
 				<div id="youtube_id"></div>
 				<div class="video-wrapper">
-					<img id="fox" src="/img/fox_holder.jpg" />
+					<img id="fox" src="/img/fox_holder_copy.jpg" />
 					<div id="player"></div>
 				</div>
 
@@ -75,23 +75,27 @@
 
 				<div id="comment_area"></div>
 
-				<div id="app"></div>
-				<p data-id="testing">Test</p>
-
 			</div>
 		</div>
 
 						
-
+		<div class="clearfooter"></div>
 	</div>
 
-	<div>
-	<% include partials/footer %>
+<footer id="footer-body" class="navbar navbar-default navbar-fixed-bottom">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<p>Rhea Rivera &copy; 2016 | <a href="https://github.com/rjuner/ynote">GitHub</a></p>
+			</div>
+		</div>
+
 	</div>
+</footer>
 
 	<!-- App Scripts -->
 	<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
-	<script src="bundle.js"></script>
 	<script src="app.js"></script>
 
 </body>
